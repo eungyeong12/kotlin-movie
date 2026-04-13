@@ -3,7 +3,7 @@ package movie.domain.payment
 import movie.data.SeatsData
 import movie.domain.amount.Point
 import movie.domain.amount.Price
-import movie.domain.discount.DiscountPolicies
+import movie.domain.discount.DiscountPolicyAdapter
 import movie.domain.discount.MovieDayDiscount
 import movie.domain.discount.TimeDiscount
 import movie.domain.movie.Movie
@@ -65,18 +65,18 @@ class PriceCalculatorTest {
                 ),
             )
 
-        val discountPolicies =
-            DiscountPolicies(
+        val discountPolicy =
+            DiscountPolicyAdapter(
                 percentagePolicies = listOf(MovieDayDiscount()),
                 fixedPolicies = listOf(TimeDiscount()),
             )
 
         val priceCalculator = PriceCalculator()
-        val totalPrice = reservations.discountedTotalPrice(discountPolicies)
 
         val result =
             priceCalculator.calculate(
-                totalPrice,
+                reservations,
+                discountPolicy,
                 Point(1000),
                 PaymentMethod.CreditCard(),
             )

@@ -2,7 +2,7 @@ package movie.domain.reservation
 
 import movie.data.SeatsData
 import movie.domain.amount.Price
-import movie.domain.discount.DiscountPolicies
+import movie.domain.discount.DiscountPolicyAdapter
 import movie.domain.discount.MovieDayDiscount
 import movie.domain.discount.TimeDiscount
 import movie.domain.movie.Movie
@@ -158,7 +158,7 @@ class ReservationsTest {
         // then
         assert(
             reservations.discountedTotalPrice(
-                DiscountPolicies(
+                DiscountPolicyAdapter(
                     listOf(MovieDayDiscount()),
                     listOf(TimeDiscount()),
                 ),

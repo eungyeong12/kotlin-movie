@@ -23,15 +23,15 @@ class DiscountPoliciesTest {
     @Test
     fun `비율 할인 정책이 먼저 적용된 후 정액 할인 정책이 적용된다`() {
         // given
-        val discountPolicies =
-            DiscountPolicies(
+        val discountPolicyAdapter =
+            DiscountPolicyAdapter(
                 listOf(FakePercentageDiscount()),
                 listOf(FakeFixedAmountDiscount()),
             )
 
         // when
         val result =
-            discountPolicies.applyDiscount(
+            discountPolicyAdapter.applyDiscount(
                 Price(10000),
                 LocalDateTime.of(2026, 1, 10, 10, 0),
             )

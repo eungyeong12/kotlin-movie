@@ -1,7 +1,7 @@
 package movie.domain.reservation
 
 import movie.domain.amount.Price
-import movie.domain.discount.DiscountPolicies
+import movie.domain.discount.DiscountPolicy
 
 class Reservations(
     private val reservations: List<Reservation>,
@@ -12,12 +12,12 @@ class Reservations(
 
     fun add(reservation: Reservation): List<Reservation> = Reservations(reservations + reservation).reservations
 
-    fun discountedTotalPrice(discountPolicies: DiscountPolicies): Price {
+    fun discountedTotalPrice(discountPolicy: DiscountPolicy): Price {
         var price = Price(0)
         reservations.forEach { reservation ->
             val screeningDateTime = reservation.screening.screeningDateTime
             val discounted =
-                discountPolicies.applyDiscount(
+                discountPolicy.applyDiscount(
                     reservation.calculatePrice(),
                     screeningDateTime.date.atTime(screeningDateTime.startTime),
                 )

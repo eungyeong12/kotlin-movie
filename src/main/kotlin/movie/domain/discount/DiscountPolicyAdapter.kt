@@ -3,20 +3,20 @@ package movie.domain.discount
 import movie.domain.amount.Price
 import java.time.LocalDateTime
 
-class DiscountPolicies(
+class DiscountPolicyAdapter(
     private val percentagePolicies: List<PercentageDiscountPolicy>,
     private val fixedPolicies: List<FixedAmountDiscountPolicy>,
-) {
-    fun applyDiscount(
+) : DiscountPolicy {
+    override fun applyDiscount(
         price: Price,
-        dateTime: LocalDateTime,
+        localDateTime: LocalDateTime,
     ): Price {
         var result = price
         percentagePolicies.forEach {
-            result = it.applyDiscount(result, dateTime)
+            result = it.applyDiscount(result, localDateTime)
         }
         fixedPolicies.forEach {
-            result = it.applyDiscount(result, dateTime)
+            result = it.applyDiscount(result, localDateTime)
         }
         return result
     }
