@@ -19,7 +19,7 @@ class FakeFixedAmountDiscount : FixedAmountDiscountPolicy {
     ): Price = price.minus(Price(2000))
 }
 
-class DiscountPoliciesTest {
+class DiscountPolicyAdapterTest {
     @Test
     fun `비율 할인 정책이 먼저 적용된 후 정액 할인 정책이 적용된다`() {
         // given
