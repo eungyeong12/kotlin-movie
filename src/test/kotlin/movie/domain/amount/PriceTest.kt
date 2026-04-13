@@ -3,6 +3,9 @@ package movie.domain.amount
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.ValueSource
 
 class PriceTest {
     @Test
@@ -53,13 +56,30 @@ class PriceTest {
         assertThat(result).isEqualTo(Price(0))
     }
 
-    @Test
-    fun `퍼센트가 0에서 100 사이여야 한다`() {
+    @ParameterizedTest
+    @ValueSource(ints = [-1, 101])
+    fun `퍼센트가 범위를 벗어나면 예외가 발생한다`(percent: Int) {
         val price = Price(10000)
         val exception =
             assertThrows<IllegalArgumentException> {
-                price.percentOf(101)
+                price.percentOf(percent)
             }
         assertThat(exception.message).isEqualTo("퍼센트는 0~100 사이여야 합니다.")
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "0, 0",
+        "100, 10000",
+    )
+    fun `퍼센트가 경계값이면 정상적으로 계산된다`(
+        percent: Int,
+        expected: Int,
+    ) {
+        val price = Price(10000)
+
+        val result = price.percentOf(percent)
+
+        assertThat(result).isEqualTo(Price(expected))
     }
 }
