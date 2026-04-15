@@ -7,6 +7,7 @@ import movie.domain.discount.DiscountPolicyAdapter
 import movie.domain.discount.MovieDayDiscount
 import movie.domain.discount.PaymentDiscountPolicy
 import movie.domain.discount.PaymentMethodDiscountPolicy
+import movie.domain.discount.PaymentMethodInputParser
 import movie.domain.discount.TimeDiscount
 import movie.domain.movie.Movie
 import movie.domain.movie.Movies
@@ -92,7 +93,7 @@ class MovieController(
 
     private fun selectPaymentMethod(): PaymentMethod {
         val input = executeWithRetry { inputView.inputPayment() }
-        return PaymentMethod.from(input)
+        return PaymentMethodInputParser.parse(input)
     }
 
     // 예매 로직
