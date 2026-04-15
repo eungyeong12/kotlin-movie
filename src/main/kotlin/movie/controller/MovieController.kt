@@ -5,6 +5,8 @@ import movie.domain.amount.Point
 import movie.domain.discount.DiscountPolicy
 import movie.domain.discount.DiscountPolicyAdapter
 import movie.domain.discount.MovieDayDiscount
+import movie.domain.discount.PaymentDiscountPolicy
+import movie.domain.discount.PaymentMethodDiscountPolicy
 import movie.domain.discount.TimeDiscount
 import movie.domain.movie.Movie
 import movie.domain.movie.Movies
@@ -38,10 +40,11 @@ class MovieController(
                 percentagePolicies = listOf(MovieDayDiscount()),
                 fixedPolicies = listOf(TimeDiscount()),
             )
+        val paymentDiscountPolicy = PaymentMethodDiscountPolicy()
 
         showCart(reservations)
 
-        val paymentResult = processPayment(discountPolicy, reservations)
+        val paymentResult = processPayment(discountPolicy, paymentDiscountPolicy, reservations)
 
         confirmAndComplete(reservations, paymentResult)
     }
@@ -49,12 +52,13 @@ class MovieController(
     // 메인 로직
     private fun processPayment(
         discountPolicy: DiscountPolicy,
+        paymentDiscountPolicy: PaymentDiscountPolicy,
         reservations: Reservations,
     ): PaymentResult {
         val point = inputPoint()
         val paymentMethod = selectPaymentMethod()
 
-        val paymentResult = priceCalculator.calculate(reservations, discountPolicy, point, paymentMethod)
+        val paymentResult = priceCalculator.calculate(reservations, discountPolicy, paymentDiscountPolicy, point, paymentMethod)
 
         outputView.printFinalPrice(paymentResult.totalPrice)
         return paymentResult

@@ -4,6 +4,7 @@ import movie.data.SeatsData
 import movie.domain.amount.Point
 import movie.domain.amount.Price
 import movie.domain.discount.DiscountPolicy
+import movie.domain.discount.PaymentDiscountPolicy
 import movie.domain.movie.Movie
 import movie.domain.reservation.Reservation
 import movie.domain.reservation.Reservations
@@ -26,6 +27,13 @@ class FakeDiscountPolicy : DiscountPolicy {
     override fun applyDiscount(
         price: Price,
         localDateTime: LocalDateTime,
+    ): Price = price.minus(Price(1000))
+}
+
+class FakePaymentDiscountPolicy : PaymentDiscountPolicy {
+    override fun applyDiscount(
+        price: Price,
+        paymentMethod: PaymentMethod,
     ): Price = price.minus(Price(1000))
 }
 
@@ -72,17 +80,19 @@ class PriceCalculatorTest {
             )
 
         val discountPolicy = FakeDiscountPolicy()
+        val paymentDiscountPolicy = FakePaymentDiscountPolicy()
         val priceCalculator = PriceCalculator()
 
         val result =
             priceCalculator.calculate(
                 reservations,
                 discountPolicy,
+                paymentDiscountPolicy,
                 Point(1000),
-                PaymentMethod.CreditCard(),
+                PaymentMethod.CreditCard,
             )
 
-        assertThat(result.totalPrice).isEqualTo(Price(15200))
+        assertThat(result.totalPrice).isEqualTo(Price(15000))
         assertThat(result.usedPoint).isEqualTo(Point(1000))
     }
 }
