@@ -4,9 +4,9 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.sql.DriverManager
 
-class DatabaseConnectionTest {
+class SchemaInitializerTest {
     @Test
-    fun `H2 데이터베이스에 연결할 수 있다`() {
+    fun `스키마를 초기화하면 movies 테이블이 생성된다`() {
         val connection =
             DriverManager.getConnection(
                 "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1",
@@ -18,6 +18,14 @@ class DatabaseConnectionTest {
         if (resultSet.next()) {
             val result = resultSet.getInt(1)
             assertThat(result).isEqualTo(1)
+        }
+        connection.use {
+            SchemaInitializer.initialize(connection)
+
+            val resultSet = it.metaData.getTables(null, null, "MOVIES", null)
+            resultSet.use { tables ->
+                assertThat(tables.next()).isTrue
+            }
         }
     }
 }
