@@ -33,6 +33,7 @@ object MovieData {
         val screenings =
             listOf(
                 Screening(
+                    1L,
                     screen,
                     ScreeningDateTime(
                         LocalDateTime.of(2025, 9, 20, 10, 20),
@@ -41,6 +42,7 @@ object MovieData {
                     ReservedSeats(Seats(emptySet())),
                 ),
                 Screening(
+                    2L,
                     screen,
                     ScreeningDateTime(
                         LocalDateTime.of(2025, 9, 20, 13, 0),
@@ -58,6 +60,7 @@ object MovieData {
                     ),
                 ),
                 Screening(
+                    3L,
                     screen,
                     ScreeningDateTime(
                         LocalDateTime.of(2025, 9, 20, 15, 40),
@@ -66,6 +69,7 @@ object MovieData {
                     ReservedSeats(Seats(emptySet())),
                 ),
                 Screening(
+                    4L,
                     screen,
                     ScreeningDateTime(
                         LocalDateTime.of(2025, 9, 20, 20, 10),
@@ -85,6 +89,7 @@ object MovieData {
         val screenings =
             listOf(
                 Screening(
+                    1L,
                     screen,
                     ScreeningDateTime(
                         LocalDateTime.of(2025, 9, 20, 13, 30),
@@ -93,6 +98,7 @@ object MovieData {
                     ReservedSeats(Seats(emptySet())),
                 ),
                 Screening(
+                    2L,
                     screen,
                     ScreeningDateTime(
                         LocalDateTime.of(2025, 9, 20, 16, 0),
@@ -112,6 +118,7 @@ object MovieData {
         val screenings =
             listOf(
                 Screening(
+                    1L,
                     screen,
                     ScreeningDateTime(
                         LocalDateTime.of(2025, 9, 20, 9, 50),

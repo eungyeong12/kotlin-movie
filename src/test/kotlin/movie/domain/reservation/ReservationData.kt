@@ -28,6 +28,7 @@ object ReservationData {
 
     private val screening1 =
         Screening(
+            1L,
             screen,
             ScreeningDateTime(
                 LocalDateTime.of(2026, 1, 1, 10, 0),
@@ -38,6 +39,7 @@ object ReservationData {
 
     private val screening2 =
         Screening(
+            2L,
             screen,
             ScreeningDateTime(
                 LocalDateTime.of(2026, 1, 1, 14, 0),

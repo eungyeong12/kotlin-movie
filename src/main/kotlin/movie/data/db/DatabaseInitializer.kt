@@ -2,6 +2,7 @@ package movie.data.db
 
 import movie.data.MovieData
 import movie.data.db.movie.MovieRepository
+import movie.data.db.screening.ScreeningRepository
 
 object DatabaseInitializer {
     fun initialize() {
@@ -9,11 +10,16 @@ object DatabaseInitializer {
             SchemaInitializer.initialize(connection)
 
             val movieRepository = MovieRepository(connection)
+            val screeningRepository = ScreeningRepository(connection)
             val movies = MovieData.createMovies()
 
             if (movieRepository.isEmpty()) {
-                movies.forEach {
-                    movieRepository.save(it, 120)
+                movies.forEach { movie ->
+                    movieRepository.save(movie, 120)
+
+                    movie.screenings.screenings.forEach { screening ->
+                        screeningRepository.save(movie.id, screening)
+                    }
                 }
             }
         }

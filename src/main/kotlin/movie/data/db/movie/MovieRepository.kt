@@ -1,5 +1,6 @@
 package movie.data.db.movie
 
+import movie.data.db.screening.ScreeningRepository
 import movie.domain.movie.Movie
 import movie.domain.screening.Screenings
 import java.sql.Connection
@@ -23,20 +24,21 @@ class MovieRepository(
 
     fun findAll(): List<Movie> {
         val sql = "select id, title, running_time_minutes from movies"
-
         val result = mutableListOf<Movie>()
+        val screeningRepository = ScreeningRepository(connection)
 
         connection.createStatement().use { statement ->
             statement.executeQuery(sql).use { resultSet ->
                 while (resultSet.next()) {
                     val id = resultSet.getLong("id")
                     val title = resultSet.getString("title")
+                    val screenings = screeningRepository.findAllByMovieId(id)
 
                     result.add(
                         Movie(
                             id = id,
                             title = title,
-                            screenings = Screenings(emptyList()),
+                            screenings = Screenings(screenings),
                         ),
                     )
                 }

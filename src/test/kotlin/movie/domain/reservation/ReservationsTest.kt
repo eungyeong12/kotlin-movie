@@ -37,6 +37,7 @@ class ReservationsTest {
 
         val screening =
             Screening(
+                1L,
                 Screen(1, SeatsData.seats),
                 ScreeningDateTime(
                     LocalDateTime.of(2026, 1, 1, 13, 0),
@@ -78,6 +79,7 @@ class ReservationsTest {
 
         val screening =
             Screening(
+                1L,
                 Screen(1, SeatsData.seats),
                 ScreeningDateTime(
                     LocalDateTime.of(2026, 1, 1, 10, 0),
@@ -121,6 +123,7 @@ class ReservationsTest {
 
         val screening1 =
             Screening(
+                1L,
                 screen,
                 ScreeningDateTime(
                     LocalDateTime.of(2026, 1, 10, 12, 0),
@@ -131,6 +134,7 @@ class ReservationsTest {
 
         val screening2 =
             Screening(
+                2L,
                 screen,
                 ScreeningDateTime(
                     LocalDateTime.of(2026, 1, 1, 9, 0),

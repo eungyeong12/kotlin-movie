@@ -20,6 +20,7 @@ class MovieTest {
             Screenings(
                 listOf(
                     Screening(
+                        1L,
                         screen = Screen(1, SeatsData.seats),
                         screeningDateTime =
                             ScreeningDateTime(

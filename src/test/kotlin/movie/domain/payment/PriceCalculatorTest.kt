@@ -41,6 +41,7 @@ class PriceCalculatorTest {
         // given
         val screening =
             Screening(
+                id = 1L,
                 screen = Screen(1, SeatsData.seats),
                 screeningDateTime =
                     ScreeningDateTime(
