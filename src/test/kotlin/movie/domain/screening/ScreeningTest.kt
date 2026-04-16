@@ -8,8 +8,7 @@ import movie.domain.seat.Seats
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import java.time.LocalDate
-import java.time.LocalTime
+import java.time.LocalDateTime
 
 class ScreeningTest {
     @Test
@@ -25,9 +24,8 @@ class ScreeningTest {
             Screening(
                 Screen(1, SeatsData.seats),
                 ScreeningDateTime(
-                    LocalDate.of(2026, 1, 1),
-                    LocalTime.of(10, 0),
-                    LocalTime.of(12, 0),
+                    LocalDateTime.of(2026, 1, 1, 10, 0),
+                    LocalDateTime.of(2026, 1, 1, 12, 0),
                 ),
                 ReservedSeats(
                     Seats(
@@ -62,9 +60,8 @@ class ScreeningTest {
             Screening(
                 Screen(1, SeatsData.seats),
                 ScreeningDateTime(
-                    LocalDate.of(2026, 1, 1),
-                    LocalTime.of(10, 0),
-                    LocalTime.of(12, 0),
+                    LocalDateTime.of(2026, 1, 1, 10, 0),
+                    LocalDateTime.of(2026, 1, 1, 12, 0),
                 ),
                 ReservedSeats(
                     Seats(
@@ -96,9 +93,8 @@ class ScreeningTest {
             Screening(
                 Screen(1, SeatsData.seats),
                 ScreeningDateTime(
-                    LocalDate.of(2026, 1, 1),
-                    LocalTime.of(10, 0),
-                    LocalTime.of(12, 0),
+                    LocalDateTime.of(2026, 1, 1, 10, 0),
+                    LocalDateTime.of(2026, 1, 1, 12, 0),
                 ),
                 ReservedSeats(
                     Seats(

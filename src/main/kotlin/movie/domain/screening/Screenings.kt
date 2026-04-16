@@ -7,7 +7,7 @@ class Screenings(
 ) {
     private val screenings = screenings.toList()
 
-    fun hasScreeningOnDate(date: LocalDate): Boolean = screenings.any { it.screeningDateTime.date == date }
+    fun hasScreeningOnDate(date: LocalDate): Boolean = screenings.any { it.screeningDateTime.startAt.toLocalDate() == date }
 
-    fun getScreeningsByDate(date: LocalDate): List<Screening> = screenings.filter { it.screeningDateTime.date == date }
+    fun getScreeningsByDate(date: LocalDate): List<Screening> = screenings.filter { it.screeningDateTime.startAt.toLocalDate() == date }
 }

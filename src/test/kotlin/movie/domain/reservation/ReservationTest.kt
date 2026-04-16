@@ -14,8 +14,7 @@ import movie.domain.seat.Seats
 import movie.domain.seat.SelectedSeats
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.time.LocalDate
-import java.time.LocalTime
+import java.time.LocalDateTime
 
 class ReservationTest {
     @Test
@@ -35,9 +34,8 @@ class ReservationTest {
             Screening(
                 Screen(1, SeatsData.seats),
                 ScreeningDateTime(
-                    LocalDate.of(2026, 1, 1),
-                    LocalTime.of(10, 0),
-                    LocalTime.of(12, 0),
+                    LocalDateTime.of(2026, 1, 1, 10, 0),
+                    LocalDateTime.of(2026, 1, 1, 12, 0),
                 ),
                 ReservedSeats(
                     Seats(

@@ -19,9 +19,7 @@ import movie.domain.seat.Seats
 import movie.domain.seat.SelectedSeats
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.LocalTime
 
 class FakeDiscountPolicy : DiscountPolicy {
     override fun applyDiscount(
@@ -46,9 +44,8 @@ class PriceCalculatorTest {
                 screen = Screen(1, SeatsData.seats),
                 screeningDateTime =
                     ScreeningDateTime(
-                        LocalDate.of(2026, 1, 10),
-                        LocalTime.of(10, 0),
-                        LocalTime.of(12, 0),
+                        LocalDateTime.of(2026, 1, 10, 10, 0),
+                        LocalDateTime.of(2026, 1, 10, 12, 0),
                     ),
                 reservedSeats =
                     ReservedSeats(

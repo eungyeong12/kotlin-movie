@@ -18,8 +18,7 @@ import movie.domain.seat.SelectedSeats
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import java.time.LocalDate
-import java.time.LocalTime
+import java.time.LocalDateTime
 
 class ReservationsTest {
     @Test
@@ -40,9 +39,8 @@ class ReservationsTest {
             Screening(
                 Screen(1, SeatsData.seats),
                 ScreeningDateTime(
-                    LocalDate.of(2026, 1, 1),
-                    LocalTime.of(13, 0),
-                    LocalTime.of(14, 0),
+                    LocalDateTime.of(2026, 1, 1, 13, 0),
+                    LocalDateTime.of(2026, 1, 1, 14, 0),
                 ),
                 ReservedSeats(
                     Seats(
@@ -82,9 +80,8 @@ class ReservationsTest {
             Screening(
                 Screen(1, SeatsData.seats),
                 ScreeningDateTime(
-                    LocalDate.of(2026, 1, 1),
-                    LocalTime.of(10, 0),
-                    LocalTime.of(13, 0),
+                    LocalDateTime.of(2026, 1, 1, 10, 0),
+                    LocalDateTime.of(2026, 1, 1, 13, 0),
                 ),
                 ReservedSeats(
                     Seats(
@@ -126,9 +123,8 @@ class ReservationsTest {
             Screening(
                 screen,
                 ScreeningDateTime(
-                    LocalDate.of(2026, 1, 10),
-                    LocalTime.of(12, 0),
-                    LocalTime.of(14, 0),
+                    LocalDateTime.of(2026, 1, 10, 12, 0),
+                    LocalDateTime.of(2026, 1, 10, 14, 0),
                 ),
                 ReservedSeats(Seats(emptySet())),
             )
@@ -137,9 +133,8 @@ class ReservationsTest {
             Screening(
                 screen,
                 ScreeningDateTime(
-                    LocalDate.of(2026, 1, 1),
-                    LocalTime.of(9, 0),
-                    LocalTime.of(12, 0),
+                    LocalDateTime.of(2026, 1, 1, 9, 0),
+                    LocalDateTime.of(2026, 1, 1, 12, 0),
                 ),
                 ReservedSeats(Seats(emptySet())),
             )
