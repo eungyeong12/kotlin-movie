@@ -9,7 +9,7 @@ import java.sql.Connection
 import java.sql.Timestamp
 
 class ScreeningRepository(
-    val connection: Connection,
+    private val connection: Connection,
 ) {
     fun save(
         movieId: Long,
