@@ -9,14 +9,14 @@ class MovieRepository(
     private val connection: Connection,
 ) {
     fun save(
-        modie: Movie,
+        movie: Movie,
         runningTimeMinutes: Int,
     ) {
         val sql = "insert into movies(id, title, running_time_minutes) values (?, ?, ?)"
 
         connection.prepareStatement(sql).use { statement ->
-            statement.setLong(1, modie.id)
-            statement.setString(2, modie.title)
+            statement.setLong(1, movie.id)
+            statement.setString(2, movie.title)
             statement.setInt(3, runningTimeMinutes)
             statement.executeUpdate()
         }
