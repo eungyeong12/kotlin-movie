@@ -31,6 +31,7 @@ class MovieController(
     private val movies: Movies,
     private val user: User,
     private val priceCalculator: PriceCalculator,
+    private val onReservationComplete: (Reservations, PaymentResult, PaymentMethod) -> Unit = { _, _, _ -> },
 ) {
     fun run() {
         if (!askStartReservation()) return
@@ -45,19 +46,19 @@ class MovieController(
 
         showCart(reservations)
 
-        val paymentResult = processPayment(discountPolicy, paymentDiscountPolicy, reservations)
+        val paymentMethod = selectPaymentMethod()
+        val paymentResult = processPayment(discountPolicy, paymentDiscountPolicy, reservations, paymentMethod)
 
-        confirmAndComplete(reservations, paymentResult)
+        confirmAndComplete(reservations, paymentResult, paymentMethod)
     }
 
-    // 메인 로직
     private fun processPayment(
         discountPolicy: DiscountPolicy,
         paymentDiscountPolicy: PaymentDiscountPolicy,
         reservations: Reservations,
+        paymentMethod: PaymentMethod,
     ): PaymentResult {
         val point = inputPoint()
-        val paymentMethod = selectPaymentMethod()
 
         val paymentResult = priceCalculator.calculate(reservations, discountPolicy, paymentDiscountPolicy, point, paymentMethod)
 
@@ -68,10 +69,12 @@ class MovieController(
     private fun confirmAndComplete(
         reservations: Reservations,
         paymentResult: PaymentResult,
+        paymentMethod: PaymentMethod,
     ) {
         val confirm = executeWithRetry { inputView.confirmPayment() }
 
         if (confirm) {
+            onReservationComplete(reservations, paymentResult, paymentMethod)
             outputView.printComplete(
                 reservations,
                 paymentResult.totalPrice,

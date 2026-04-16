@@ -1,5 +1,6 @@
 package movie.data.db.screening
 
+import movie.data.db.reservation.ReservedSeatRepository
 import movie.domain.screening.Screen
 import movie.domain.screening.Screening
 import movie.domain.screening.ScreeningDateTime
@@ -11,6 +12,8 @@ import java.sql.Timestamp
 class ScreeningRepository(
     private val connection: Connection,
 ) {
+    private val reservedSeatRepository = ReservedSeatRepository(connection)
+
     fun save(
         movieId: Long,
         screening: Screening,
@@ -47,22 +50,24 @@ class ScreeningRepository(
 
             statement.executeQuery().use { resultSet ->
                 while (resultSet.next()) {
+                    val screeningId = resultSet.getLong("id")
+                    val reservedSeats = reservedSeatRepository.findByScreeningId(screeningId)
+
                     result.add(
                         Screening(
-                            id = resultSet.getLong("id"),
+                            id = screeningId,
                             screen = Screen(resultSet.getInt("screen_id")),
                             screeningDateTime =
                                 ScreeningDateTime(
                                     resultSet.getTimestamp("start_at").toLocalDateTime(),
                                     resultSet.getTimestamp("end_at").toLocalDateTime(),
                                 ),
-                            reservedSeats = ReservedSeats(Seats(emptySet())),
+                            reservedSeats = ReservedSeats(Seats(reservedSeats)),
                         ),
                     )
                 }
             }
         }
-
         return result
     }
 }

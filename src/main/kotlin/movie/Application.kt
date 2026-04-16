@@ -5,6 +5,7 @@ import movie.data.MovieData
 import movie.data.db.DatabaseInitializer
 import movie.data.db.DatabaseManager
 import movie.data.db.movie.MovieRepository
+import movie.data.db.reservation.ReservationOrderRepository
 import movie.domain.movie.Movies
 import movie.domain.payment.PriceCalculator
 import movie.view.InputView
@@ -26,6 +27,12 @@ fun main() {
             movies = Movies(movies),
             user = MovieData.createUser(),
             priceCalculator = PriceCalculator(),
+            onReservationComplete = { reservations, paymentResult, paymentMethod ->
+                DatabaseManager.connection.use { connection ->
+                    val repository = ReservationOrderRepository(connection)
+                    repository.save(reservations, paymentResult, paymentMethod)
+                }
+            },
         )
     controller.run()
 }
