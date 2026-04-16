@@ -46,8 +46,7 @@ class MovieController(
 
         showCart(reservations)
 
-        val paymentMethod = selectPaymentMethod()
-        val paymentResult = processPayment(discountPolicy, paymentDiscountPolicy, reservations, paymentMethod)
+        val (paymentResult, paymentMethod) = processPayment(discountPolicy, paymentDiscountPolicy, reservations)
 
         confirmAndComplete(reservations, paymentResult, paymentMethod)
     }
@@ -56,14 +55,14 @@ class MovieController(
         discountPolicy: DiscountPolicy,
         paymentDiscountPolicy: PaymentDiscountPolicy,
         reservations: Reservations,
-        paymentMethod: PaymentMethod,
-    ): PaymentResult {
+    ): Pair<PaymentResult, PaymentMethod> {
         val point = inputPoint()
+        val paymentMethod = selectPaymentMethod()
 
         val paymentResult = priceCalculator.calculate(reservations, discountPolicy, paymentDiscountPolicy, point, paymentMethod)
 
         outputView.printFinalPrice(paymentResult.totalPrice)
-        return paymentResult
+        return Pair(paymentResult, paymentMethod)
     }
 
     private fun confirmAndComplete(
