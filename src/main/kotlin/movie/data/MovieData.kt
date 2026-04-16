@@ -16,16 +16,19 @@ import java.time.LocalDateTime
 
 object MovieData {
     fun createMovies(): List<Movie> {
-        val screen =
-            Screen(
-                1,
-                SeatsData.seats,
-            )
-
         return listOf(
-            createF1Movie(screen),
-            createToyStory(screen),
-            createIronMan(screen),
+            createF1Movie(Screen(
+                1,
+                SeatsData.seats
+            )),
+            createToyStory(Screen(
+                2,
+                SeatsData.seats
+            )),
+            createIronMan(Screen(
+                3,
+                SeatsData.seats
+            )),
         )
     }
 
@@ -89,7 +92,7 @@ object MovieData {
         val screenings =
             listOf(
                 Screening(
-                    1L,
+                    5L,
                     screen,
                     ScreeningDateTime(
                         LocalDateTime.of(2025, 9, 20, 13, 30),
@@ -98,7 +101,7 @@ object MovieData {
                     ReservedSeats(Seats(emptySet())),
                 ),
                 Screening(
-                    2L,
+                    6L,
                     screen,
                     ScreeningDateTime(
                         LocalDateTime.of(2025, 9, 20, 16, 0),
@@ -118,7 +121,7 @@ object MovieData {
         val screenings =
             listOf(
                 Screening(
-                    1L,
+                    7L,
                     screen,
                     ScreeningDateTime(
                         LocalDateTime.of(2025, 9, 20, 9, 50),
