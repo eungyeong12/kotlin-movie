@@ -49,7 +49,7 @@ class ReservationTest {
                     ),
                 ),
             )
-        val movie = Movie(title = "F1 더 무비", screenings = Screenings(listOf(screening)))
+        val movie = Movie(id = 1, title = "F1 더 무비", screenings = Screenings(listOf(screening)))
         val reservation = Reservation(movie, screening, selectedSeats)
 
         // when

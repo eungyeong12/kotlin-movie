@@ -1,7 +1,13 @@
 package movie.data.db
 
+import java.sql.Connection
 import java.sql.DriverManager
 
 object DatabaseManager {
-    val connection = DriverManager.getConnection("jdbc:h2:mem:test", "sa", "")
+    private const val URL = "jdbc:h2:./movie-db"
+    private const val USER = "sa"
+    private const val PASSWORD = ""
+
+    val connection: Connection
+        get() = DriverManager.getConnection(URL, USER, PASSWORD)
 }

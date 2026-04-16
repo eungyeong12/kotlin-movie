@@ -1,0 +1,59 @@
+package movie.data.db.movie
+
+import movie.domain.movie.Movie
+import movie.domain.screening.Screenings
+import java.sql.Connection
+
+class MovieRepository(
+    private val connection: Connection,
+) {
+    fun save(
+        modie: Movie,
+        runningTimeMinutes: Int,
+    ) {
+        val sql = "insert into movies(id, title, running_time_minutes) values (?, ?, ?)"
+
+        connection.prepareStatement(sql).use { statement ->
+            statement.setLong(1, modie.id)
+            statement.setString(2, modie.title)
+            statement.setInt(3, runningTimeMinutes)
+            statement.executeUpdate()
+        }
+    }
+
+    fun findAll(): List<Movie> {
+        val sql = "select id, title, running_time_minutes from movies"
+
+        val result = mutableListOf<Movie>()
+
+        connection.createStatement().use { statement ->
+            statement.executeQuery(sql).use { resultSet ->
+                while (resultSet.next()) {
+                    val id = resultSet.getLong("id")
+                    val title = resultSet.getString("title")
+
+                    result.add(
+                        Movie(
+                            id = id,
+                            title = title,
+                            screenings = Screenings(emptyList()),
+                        ),
+                    )
+                }
+            }
+        }
+
+        return result
+    }
+
+    fun isEmpty(): Boolean {
+        val sql = "select count(*) from movies"
+
+        connection.createStatement().use { statement ->
+            statement.executeQuery(sql).use { resultSet ->
+                resultSet.next()
+                return resultSet.getInt(1) == 0
+            }
+        }
+    }
+}

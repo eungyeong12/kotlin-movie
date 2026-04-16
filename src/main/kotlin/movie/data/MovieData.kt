@@ -80,6 +80,7 @@ object MovieData {
                 ),
             )
         return Movie(
+            id = 1,
             title = "F1 더 무비",
             screenings = Screenings(screenings),
         )
@@ -108,6 +109,7 @@ object MovieData {
                 ),
             )
         return Movie(
+            id = 2,
             title = "토이 스토리",
             screenings = Screenings(screenings),
         )
@@ -127,6 +129,7 @@ object MovieData {
                 ),
             )
         return Movie(
+            id = 3,
             title = "아이언맨",
             screenings = Screenings(screenings),
         )
