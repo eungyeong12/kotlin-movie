@@ -58,4 +58,19 @@ class MovieRepository(
             }
         }
     }
+
+    fun findRunningTimeMap(): Map<Long, Int> {
+        val sql = "select id, running_time_minutes from movies"
+        val map = mutableMapOf<Long, Int>()
+
+        connection.createStatement().use { statement ->
+            statement.executeQuery(sql).use { resultSet ->
+                while (resultSet.next()) {
+                    map[resultSet.getLong("id")] = resultSet.getInt("running_time_minutes")
+                }
+            }
+        }
+
+        return map
+    }
 }

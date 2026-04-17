@@ -15,22 +15,27 @@ import movie.domain.user.User
 import java.time.LocalDateTime
 
 object MovieData {
-    fun createMovies(): List<Movie> {
-        return listOf(
-            createF1Movie(Screen(
-                1,
-                SeatsData.seats
-            )),
-            createToyStory(Screen(
-                2,
-                SeatsData.seats
-            )),
-            createIronMan(Screen(
-                3,
-                SeatsData.seats
-            )),
+    fun createMovies(): List<Movie> =
+        listOf(
+            createF1Movie(
+                Screen(
+                    1,
+                    SeatsData.seats,
+                ),
+            ),
+            createToyStory(
+                Screen(
+                    2,
+                    SeatsData.seats,
+                ),
+            ),
+            createIronMan(
+                Screen(
+                    3,
+                    SeatsData.seats,
+                ),
+            ),
         )
-    }
 
     private fun createF1Movie(screen: Screen): Movie {
         val screenings =
