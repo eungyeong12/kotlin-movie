@@ -21,6 +21,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
     runtimeOnly("com.h2database:h2:2.4.240")
     testImplementation("org.junit.jupiter", "junit-jupiter", "5.14.3")
     testImplementation("org.assertj", "assertj-core", "3.27.7")
