@@ -1,4 +1,4 @@
-package movie.api
+package movie.api.controller.movie
 
 import movie.api.dto.movie.MoviesResponse
 import movie.data.db.DatabaseManager
@@ -18,6 +18,6 @@ class MovieApiController {
             val movies = movieRepository.findAll()
             val runningTimeMap = movieRepository.findRunningTimeMap()
 
-            ResponseEntity.ok(MoviesResponse.from(movies, runningTimeMap))
+            ResponseEntity.ok(MoviesResponse.Companion.from(movies, runningTimeMap))
         }
 }

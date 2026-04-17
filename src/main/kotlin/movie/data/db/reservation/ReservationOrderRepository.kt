@@ -14,7 +14,7 @@ class ReservationOrderRepository(
         reservations: Reservations,
         paymentResult: PaymentResult,
         paymentMethod: PaymentMethod,
-    ) {
+    ): Long {
         val orderId = insertReservationOrder(paymentResult, paymentMethod)
 
         reservations.getReservations().forEach { reservation ->
@@ -24,6 +24,8 @@ class ReservationOrderRepository(
                 insertReservationSeat(reservationId, seat)
             }
         }
+
+        return orderId
     }
 
     private fun insertReservationOrder(

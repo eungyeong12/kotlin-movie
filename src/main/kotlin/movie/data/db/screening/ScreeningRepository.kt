@@ -70,4 +70,34 @@ class ScreeningRepository(
         }
         return result
     }
+
+    fun findById(screeningId: Long): Screening? {
+        val sql =
+            """
+            select id, screen_id, start_at, end_at
+            from screenings
+            where id = ?
+            """.trimIndent()
+
+        connection.prepareStatement(sql).use { statement ->
+            statement.setLong(1, screeningId)
+
+            statement.executeQuery().use { resultSet ->
+                if (!resultSet.next()) return null
+
+                val reservedSeats = reservedSeatRepository.findByScreeningId(screeningId)
+
+                return Screening(
+                    id = screeningId,
+                    screen = Screen(resultSet.getInt("screen_id")),
+                    screeningDateTime =
+                        ScreeningDateTime(
+                            resultSet.getTimestamp("start_at").toLocalDateTime(),
+                            resultSet.getTimestamp("end_at").toLocalDateTime(),
+                        ),
+                    reservedSeats = ReservedSeats(Seats(reservedSeats)),
+                )
+            }
+        }
+    }
 }
