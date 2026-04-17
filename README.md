@@ -43,10 +43,10 @@
 ## 구현할 기능 목록
 
 ### 1. Spring Boot 환경 구성
-- [ ] `spring-boot-starter-web` 의존성을 추가한다.
-- [ ] `jackson-module-kotlin` 의존성을 추가한다.
-- [ ] `@SpringBootApplication`을 사용하여 애플리케이션 진입점을 구성한다.
-- [ ] 기존 콘솔 기반 실행 방식을 Spring Boot 기반으로 전환한다.
+- [x] `spring-boot-starter-web` 의존성을 추가한다.
+- [x] `jackson-module-kotlin` 의존성을 추가한다.
+- [x] `@SpringBootApplication`을 사용하여 애플리케이션 진입점을 구성한다.
+- [x] 기존 콘솔 기반 실행 방식을 Spring Boot 기반으로 전환한다.
 
 ### 2. 영화 목록 조회 API
 - [ ] `GET /api/movies` 요청 시 200 OK를 반환한다.
