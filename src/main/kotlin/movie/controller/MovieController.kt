@@ -109,16 +109,17 @@ class MovieController(
         return Reservations(reservationList)
     }
 
-    private fun selectMovieAndSeats(existingReservations: List<Reservation>): Reservation {
-        val movie = selectMovie()
-        val date = selectDate(movie)
-        val screening = selectScreening(movie, date, existingReservations)
-        val seats = selectSeats(screening)
-        val updatedScreening = screening.reserve(seats)
-        val reservation = Reservation(movie, updatedScreening, SelectedSeats(seats))
-        outputView.printAddedToCart(reservation)
-        return reservation
-    }
+    private fun selectMovieAndSeats(existingReservations: List<Reservation>): Reservation =
+        executeWithRetry {
+            val movie = selectMovie()
+            val date = selectDate(movie)
+            val screening = selectScreening(movie, date, existingReservations)
+            val seats = selectSeats(screening)
+            val updatedScreening = screening.reserve(seats)
+            val reservation = Reservation(movie, updatedScreening, SelectedSeats(seats))
+            outputView.printAddedToCart(reservation)
+            reservation
+        }
 
     // 예매 상세 로직
     private fun selectMovie(): Movie =
