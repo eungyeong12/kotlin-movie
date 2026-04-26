@@ -1,4 +1,4 @@
-package movie.domain.discount
+package movie.controller.parser
 
 import movie.domain.payment.PaymentMethod
 

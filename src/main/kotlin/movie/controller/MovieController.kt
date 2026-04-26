@@ -1,5 +1,6 @@
 package movie.controller
 
+import movie.controller.parser.PaymentMethodInputParser
 import movie.domain.amount.PaymentResult
 import movie.domain.amount.Point
 import movie.domain.discount.DiscountPolicy
@@ -7,7 +8,6 @@ import movie.domain.discount.DiscountPolicyAdapter
 import movie.domain.discount.MovieDayDiscount
 import movie.domain.discount.PaymentDiscountPolicy
 import movie.domain.discount.PaymentMethodDiscountPolicy
-import movie.domain.discount.PaymentMethodInputParser
 import movie.domain.discount.TimeDiscount
 import movie.domain.movie.Movie
 import movie.domain.movie.Movies

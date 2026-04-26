@@ -1,7 +1,7 @@
-package movie.domain.discount
+package movie.controller.parser
 
 import movie.domain.payment.PaymentMethod
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -15,7 +15,7 @@ class PaymentMethodInputParserTest {
         val paymentMethod = PaymentMethodInputParser.parse(input)
 
         // then
-        assertThat(paymentMethod).isEqualTo(PaymentMethod.CreditCard)
+        Assertions.assertThat(paymentMethod).isEqualTo(PaymentMethod.CreditCard)
     }
 
     @Test
@@ -27,7 +27,7 @@ class PaymentMethodInputParserTest {
         val paymentMethod = PaymentMethodInputParser.parse(input)
 
         // then
-        assertThat(paymentMethod).isEqualTo(PaymentMethod.Cash)
+        Assertions.assertThat(paymentMethod).isEqualTo(PaymentMethod.Cash)
     }
 
     @Test
@@ -42,6 +42,6 @@ class PaymentMethodInputParserTest {
             }
 
         // then
-        assertThat(exception.message).isEqualTo("유효하지 않은 결제 수단입니다.")
+        Assertions.assertThat(exception.message).isEqualTo("유효하지 않은 결제 수단입니다.")
     }
 }
